@@ -5,7 +5,7 @@ use argh::FromArgs;
 use sea_orm::{Database, DatabaseConnection, EntityTrait};
 
 use crate::{
-    data::{DatabaseData, User},
+    data::{DatabaseData, Forum, User},
     db::prelude::*,
 };
 
@@ -25,10 +25,7 @@ impl GenerateJsonCommand {
         println!("Pinging db");
         db.ping().await.context("ping db")?;
 
-        let users = MybbUsers::find()
-            .all(&db)
-            .await
-            .context("read all users from db")?;
+        let users = MybbUsers::find().all(&db).await.context("read users")?;
         let users = users
             .into_iter()
             .map(|user| {
@@ -38,7 +35,16 @@ impl GenerateJsonCommand {
             })
             .collect::<anyhow::Result<_>>()?;
 
-        let data = DatabaseData { users };
+        let forums = MybbForums::find().all(&db).await.context("read forums")?;
+        let forums = forums
+            .into_iter()
+            .map(|f| {
+                let f: Forum = f.try_into()?;
+                Ok((f.id, f))
+            })
+            .collect::<anyhow::Result<_>>()?;
+
+        let data = DatabaseData { users, forums };
 
         let writer = File::create("data/output.json").context("open output file")?;
         serde_json::to_writer_pretty(writer, &data).context("write json output")?;

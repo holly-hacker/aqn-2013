@@ -17208,5 +17208,273 @@
         2
       ]
     }
+  },
+  "forums": {
+    "1": {
+      "id": 1,
+      "name": "The Aquila Network News & Announcements",
+      "description": "Register and activate to see the program updates.",
+      "parent": null,
+      "display_order": 1
+    },
+    "2": {
+      "id": 2,
+      "name": "News and Announcements",
+      "description": "This forum is for website based updates on the forum, as well as any server-based improvements.",
+      "parent": 1,
+      "display_order": 1
+    },
+    "3": {
+      "id": 3,
+      "name": "Program Updates",
+      "description": "This forum contains updates on the programs that The Aquila Network produces, these will be seperated with tags based on program name.",
+      "parent": 1,
+      "display_order": 1
+    },
+    "4": {
+      "id": 4,
+      "name": "Members Lounge",
+      "description": "",
+      "parent": null,
+      "display_order": 3
+    },
+    "5": {
+      "id": 5,
+      "name": "Introductions",
+      "description": "New to The Aquila Network? Pop in and say hi! :>",
+      "parent": 4,
+      "display_order": 1
+    },
+    "7": {
+      "id": 7,
+      "name": "Hack Request",
+      "description": "Want us to create a trainer / hack for a game? Why not request it here, we like a challenge, doesn't have to be a rhythm game (please be realistic).",
+      "parent": 4,
+      "display_order": 3
+    },
+    "8": {
+      "id": 8,
+      "name": "osu!",
+      "description": "",
+      "parent": null,
+      "display_order": 4
+    },
+    "9": {
+      "id": 9,
+      "name": "osu! Cheat Discussion",
+      "description": "Discuss cheating in osu! and the use of The Aquila Network's programs in such a game, discuss and share .CT cheat engine tables if you have any good ones :3.",
+      "parent": 8,
+      "display_order": 1
+    },
+    "10": {
+      "id": 10,
+      "name": "osu! General Chat",
+      "description": "Talk about anything and everything here.",
+      "parent": 8,
+      "display_order": 2
+    },
+    "11": {
+      "id": 11,
+      "name": "osu! Showoff Section",
+      "description": "Post some extraordinary plays with our cheats or without on osu! here (but please don't spam with every single one of your #1s, go for amazing shit like DT Chipscape or something). Also we don't care if you are like \"holy balls, I just beat White Wolf in a song\".",
+      "parent": 8,
+      "display_order": 3
+    },
+    "12": {
+      "id": 12,
+      "name": "Other Games",
+      "description": "",
+      "parent": null,
+      "display_order": 5
+    },
+    "13": {
+      "id": 13,
+      "name": "Dashie's Sky Racing",
+      "description": "An upcoming XNA game being coded by Annie the Eagle, on his own in C#.",
+      "parent": 12,
+      "display_order": 1
+    },
+    "14": {
+      "id": 14,
+      "name": "FPS / Shooter Games",
+      "description": "Talk about games like Battlefield 3, Call of Duty, Hard Reset and Crysis.",
+      "parent": 12,
+      "display_order": 2
+    },
+    "15": {
+      "id": 15,
+      "name": "RPG / MMORPG Games",
+      "description": "Discuss adventure games like The Elder Scrolls series (Oblivion, Skyrim), World of Warcraft.",
+      "parent": 12,
+      "display_order": 3
+    },
+    "16": {
+      "id": 16,
+      "name": "Action Games",
+      "description": "Talk about any good action games like Just Cause, Mass Effect 3, Assassin's Creed Series.",
+      "parent": 12,
+      "display_order": 4
+    },
+    "17": {
+      "id": 17,
+      "name": "Sandbox Games",
+      "description": "Have some fun talking about the creativity you can get from Sandbox games like Garry's Mod and LittleBigPlanet <i> (Note: Sandbox Games are those where you can create levels and/or edit levels, just look at LittleBigPlanet or Garry's Mod for an idea) </i>",
+      "parent": 12,
+      "display_order": 5
+    },
+    "18": {
+      "id": 18,
+      "name": "Other Games",
+      "description": "Talk about any other games you can think of here :)",
+      "parent": 12,
+      "display_order": 6
+    },
+    "19": {
+      "id": 19,
+      "name": "Off Topic",
+      "description": "Just for the registered members, feel free to discuss things going on in life, sports, hobbies, etc.",
+      "parent": 4,
+      "display_order": 4
+    },
+    "20": {
+      "id": 20,
+      "name": "osu! Paid Programs",
+      "description": "",
+      "parent": null,
+      "display_order": 2
+    },
+    "21": {
+      "id": 21,
+      "name": "osu!Relax",
+      "description": "Anything about osu!Relax, only for current subscribers!  Feel free to discuss here, report bugs, or even just brag about the things you do with it.",
+      "parent": 20,
+      "display_order": 4
+    },
+    "22": {
+      "id": 22,
+      "name": "osu! Tutorials Plus",
+      "description": "This section is for users who have an active subscription to any of the current projects.  This will include methods on how to avoid bans, remain hidden, or how to set up a program.",
+      "parent": 20,
+      "display_order": 1
+    },
+    "23": {
+      "id": 23,
+      "name": "osu!katsudon - Taiko Bot",
+      "description": "For discussion pertaining to those who own osu!katsudon Taiko Bot.",
+      "parent": 20,
+      "display_order": 5
+    },
+    "24": {
+      "id": 24,
+      "name": "Junked Threads",
+      "description": "Only for Admins/Mods to see.",
+      "parent": 20,
+      "display_order": 100
+    },
+    "25": {
+      "id": 25,
+      "name": "osu!Relax Issues",
+      "description": "",
+      "parent": 21,
+      "display_order": 1
+    },
+    "26": {
+      "id": 26,
+      "name": "osu!katsudon Issues",
+      "description": "Post problems with osu!katsudon here",
+      "parent": 23,
+      "display_order": 1
+    },
+    "27": {
+      "id": 27,
+      "name": "osu!Relax Accepted Sugestions",
+      "description": "",
+      "parent": 21,
+      "display_order": 1
+    },
+    "28": {
+      "id": 28,
+      "name": "osu!TimeWarp",
+      "description": "Anything about osu!TimeWarp, only for current subscribers! Feel free to discuss here, report bugs, or even just brag about the things you do with it.   More importantly, post your awesome replays!",
+      "parent": 20,
+      "display_order": 7
+    },
+    "29": {
+      "id": 29,
+      "name": "osu!TimeWarp Issues",
+      "description": "Issues regarding osu!TimeWarp.",
+      "parent": 28,
+      "display_order": 1
+    },
+    "30": {
+      "id": 30,
+      "name": "Non-English.",
+      "description": "Use any language here.  Kev may not be able to offer much support here, but hopefully other users may!",
+      "parent": 4,
+      "display_order": 4
+    },
+    "31": {
+      "id": 31,
+      "name": "osu!Catch Beta",
+      "description": "For discussion of osu!Catch Beta.  Your feedback is very helpful to me.",
+      "parent": 20,
+      "display_order": 6
+    },
+    "32": {
+      "id": 32,
+      "name": "osu! Plus General",
+      "description": "Talk about anything here, just for subscribers :3",
+      "parent": 20,
+      "display_order": 2
+    },
+    "33": {
+      "id": 33,
+      "name": "osu!Auto",
+      "description": "Anything about osu!Auto goes here, only for current subscribers!",
+      "parent": 20,
+      "display_order": 3
+    },
+    "34": {
+      "id": 34,
+      "name": "osu!Auto Issues",
+      "description": "Report all bugs here or issues you have please!",
+      "parent": 33,
+      "display_order": 1
+    },
+    "35": {
+      "id": 35,
+      "name": "osu!katsudon Suggestions",
+      "description": "Post your suggestions on the osu!katsudon Taiko Bot here :D",
+      "parent": 23,
+      "display_order": 2
+    },
+    "36": {
+      "id": 36,
+      "name": "osu!katsudon - Resolved Threads",
+      "description": "A place for resolved threads to stay :D",
+      "parent": 23,
+      "display_order": 3
+    },
+    "37": {
+      "id": 37,
+      "name": "Off-Topic Plus",
+      "description": "Just about anything goes here for the members with a subscription.",
+      "parent": 20,
+      "display_order": 30
+    },
+    "38": {
+      "id": 38,
+      "name": "osu!Maniac",
+      "description": "Anything about osu!Maniac, only for current subscribers! Feel free to discuss here or report bugs.",
+      "parent": 20,
+      "display_order": 8
+    },
+    "39": {
+      "id": 39,
+      "name": "osu!Maniac Issues",
+      "description": "",
+      "parent": 38,
+      "display_order": 1
+    }
   }
 }
