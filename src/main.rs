@@ -3,6 +3,7 @@ use argh::FromArgs;
 mod actions;
 mod data;
 mod db;
+mod templates;
 
 /// The AQN2013 cli tool
 #[derive(FromArgs)]
@@ -18,5 +19,6 @@ async fn main() -> anyhow::Result<()> {
 
     match args.action {
         actions::CliAction::GenerateJson(cmd) => cmd.run().await,
+        actions::CliAction::RenderHtml(cmd) => cmd.run().await,
     }
 }

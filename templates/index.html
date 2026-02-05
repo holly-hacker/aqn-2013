@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <ul>
+            {% for parent_forum in forums if parent_forum.parent == None %}
+            <li>
+                {{parent_forum.id}}: {{parent_forum.name}}
+                <ul>
+                    {% for child_forum in forums if child_forum.parent ==
+                    Some(*parent_forum.id) %}
+                    <li>{{child_forum.id}}: {{child_forum.name}}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
