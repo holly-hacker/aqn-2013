@@ -1,0 +1,12 @@
+[package]
+name = "aqn-ssg"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.101"
+argh = "0.1.13"
+sea-orm = { version = "2.0.0-rc.30", features = ["runtime-tokio-rustls", "sqlx-mysql"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+tokio = { version = "1.49.0", features = ["macros", "rt"] }
