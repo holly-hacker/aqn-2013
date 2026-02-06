@@ -4,20 +4,24 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="https://classless.de/classless.css" />
     </head>
     <body>
-        <ul>
-            {% for parent_forum in forums if parent_forum.parent == None %}
-            <li>
-                {{parent_forum.id}}: {{parent_forum.name}}
-                <ul>
-                    {% for child_forum in forums if child_forum.parent ==
-                    Some(*parent_forum.id) %}
-                    <li>{{child_forum.id}}: {{child_forum.name}}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-        </ul>
+        <h1>The Aquila Network</h1>
+        {% for parent_forum in forums if parent_forum.parent == None %}
+        <div style="border: 1px solid black">
+            <h2 data-id="{{parent_forum.id}}">{{parent_forum.name}}</h2>
+            <ul>
+                {% for child_forum in forums if child_forum.parent ==
+                Some(*parent_forum.id) %}
+                <li>
+                    {{child_forum.id}}: {{child_forum.name}}
+                    <br />
+                    {{child_forum.description}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
     </body>
 </html>
