@@ -82,6 +82,7 @@ pub struct Thread {
     pub subject: String,
     pub user_id: u32,
     pub creation_date: Timestamp,
+    pub sticky: bool,
 }
 
 impl TryFrom<MybbThread> for Thread {
@@ -94,6 +95,7 @@ impl TryFrom<MybbThread> for Thread {
             user_id: value.uid,
             subject: value.subject,
             creation_date: Timestamp::from_second(value.dateline).context("convert timestamp")?,
+            sticky: value.sticky != 0,
         })
     }
 }
