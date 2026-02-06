@@ -14,8 +14,10 @@
             <ul>
                 {% for child_forum in forums if child_forum.parent ==
                 Some(*parent_forum.id) %}
-                <li>
-                    {{child_forum.id}}: {{child_forum.name}}
+                <li data-id="{{child_forum.id}}">
+                    <a href="forums/{{child_forum.id}}.html">
+                        {{child_forum.name}}
+                    </a>
                     <br />
                     {{child_forum.description}}
                 </li>

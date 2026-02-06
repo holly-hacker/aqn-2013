@@ -1,13 +1,13 @@
-use std::fs::File;
+use std::{collections::BTreeMap, fs::File};
 
 use anyhow::Context as _;
 use argh::FromArgs;
-use sea_orm::{Database, DatabaseConnection, EntityTrait};
-
-use crate::{
-    data::{DatabaseData, Forum, User},
-    db::prelude::*,
+use sea_orm::{
+    Database, DatabaseConnection, EntityTrait, ModelTrait, PrimaryKeyTrait, Value,
+    sea_query::ValueTuple,
 };
+
+use crate::{data::DatabaseData, db::prelude::*};
 
 /// Import a database backup
 #[derive(FromArgs)]
@@ -25,32 +25,90 @@ impl GenerateJsonCommand {
         println!("Pinging db");
         db.ping().await.context("ping db")?;
 
-        let users = MybbUsers::find().all(&db).await.context("read users")?;
-        let users = users
-            .into_iter()
-            .map(|user| {
-                let user: User = user.try_into()?;
+        println!("Reading database");
+        let users = Self::get_from_db::<MybbUsers, _>(&db)
+            .await
+            .context("get users")?;
 
-                Ok((user.id, user))
-            })
-            .collect::<anyhow::Result<_>>()?;
+        let forums = Self::get_from_db::<MybbForums, _>(&db)
+            .await
+            .context("get forums")?;
 
-        let forums = MybbForums::find().all(&db).await.context("read forums")?;
-        let forums = forums
-            .into_iter()
-            .map(|f| {
-                let f: Forum = f.try_into()?;
-                Ok((f.id, f))
-            })
-            .collect::<anyhow::Result<_>>()?;
+        let threads = Self::get_from_db::<MybbThreads, _>(&db)
+            .await
+            .context("get threads")?;
 
-        let data = DatabaseData { users, forums };
+        let posts = Self::get_from_db::<MybbPosts, _>(&db)
+            .await
+            .context("get forums")?;
 
+        let data = DatabaseData {
+            users,
+            forums,
+            threads,
+            posts,
+        };
+
+        println!("Writing to disk");
         let writer = File::create("data/output.json").context("open output file")?;
         serde_json::to_writer_pretty(writer, &data).context("write json output")?;
 
         println!("Done");
 
         Ok(())
+    }
+
+    async fn get_from_db<TDb: EntityTrait, TModel: TryFrom<TDb::Model, Error = anyhow::Error>>(
+        db: &DatabaseConnection,
+    ) -> anyhow::Result<BTreeMap<<TDb::PrimaryKey as PrimaryKeyTrait>::ValueType, TModel>>
+    where
+        <TDb::PrimaryKey as PrimaryKeyTrait>::ValueType: Ord + PkConvert,
+    {
+        let db_entities = TDb::find()
+            .all(db)
+            .await
+            .context("read database entities")?;
+        let models = db_entities
+            .into_iter()
+            .map(|f| {
+                let pk_value = match f.get_primary_key_value() {
+                    ValueTuple::One(one) => one,
+                    _ => anyhow::bail!("Expected single primary key"),
+                };
+                let pk =
+                    <<TDb::PrimaryKey as PrimaryKeyTrait>::ValueType as PkConvert>::try_convert(
+                        pk_value,
+                    );
+                let m: TModel = f.try_into().context("ya")?;
+                Ok((pk, m))
+            })
+            .collect::<anyhow::Result<_>>()
+            .context("convert models")?;
+
+        Ok(models)
+    }
+}
+
+pub trait PkConvert {
+    fn try_convert(value: Value) -> Self;
+}
+
+impl PkConvert for u16 {
+    fn try_convert(value: Value) -> Self {
+        match value {
+            Value::SmallUnsigned(Some(x)) => x,
+            Value::SmallUnsigned(None) => unreachable!("Null primary key"),
+            _ => unreachable!("Unexepected primary key type"),
+        }
+    }
+}
+
+impl PkConvert for u32 {
+    fn try_convert(value: Value) -> Self {
+        match value {
+            Value::Unsigned(Some(x)) => x,
+            Value::Unsigned(None) => unreachable!("Null primary key"),
+            _ => unreachable!("Unexepected primary key type"),
+        }
     }
 }
