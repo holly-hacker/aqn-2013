@@ -9,21 +9,19 @@
     <body>
         <h1>The Aquila Network</h1>
         {% for parent_forum in forums if parent_forum.parent == None %}
-        <div style="border: 1px solid black">
-            <h2 data-id="{{parent_forum.id}}">{{parent_forum.name}}</h2>
-            <ul>
-                {% for child_forum in forums if child_forum.parent ==
-                Some(*parent_forum.id) %}
-                <li data-id="{{child_forum.id}}">
-                    <a href="forums/{{child_forum.id}}.html">
-                        {{child_forum.name}}
-                    </a>
-                    <br />
-                    {{child_forum.description}}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <h2 data-id="{{parent_forum.id}}">{{parent_forum.name}}</h2>
+        <ul>
+            {% for child_forum in forums if child_forum.parent ==
+            Some(*parent_forum.id) %}
+            <li data-id="{{child_forum.id}}">
+                <a href="forums/{{child_forum.id}}.html">
+                    {{child_forum.name}}
+                </a>
+                <br />
+                {{child_forum.description}}
+            </li>
+            {% endfor %}
+        </ul>
         {% endfor %}
     </body>
 </html>
