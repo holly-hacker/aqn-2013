@@ -3,7 +3,10 @@ use std::collections::BTreeMap;
 use anyhow::Context as _;
 use askama::Template;
 
-use crate::data::{DatabaseData, Post, Thread, User};
+use crate::{
+    data::{DatabaseData, Post, Thread, User},
+    filters,
+};
 
 #[derive(Template)]
 #[template(path = "thread.html")]

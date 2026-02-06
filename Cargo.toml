@@ -7,6 +7,7 @@ edition = "2024"
 anyhow = "1.0.101"
 argh = "0.1.13"
 askama = "0.15.4"
+bbscope = "0.2.0"
 jiff = { version = "0.2.19", default-features = false, features = ["std", "serde"] }
 sea-orm = { version = "2.0.0-rc.30", features = ["runtime-tokio-rustls", "sqlx-mysql"] }
 serde = { version = "1.0.228", features = ["derive"] }

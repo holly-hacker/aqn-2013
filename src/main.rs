@@ -1,9 +1,10 @@
-use argh::FromArgs;
-
 mod actions;
 mod data;
 mod db;
+mod filters;
 mod templates;
+
+use argh::FromArgs;
 
 /// The AQN2013 cli tool
 #[derive(FromArgs)]
