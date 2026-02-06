@@ -6,13 +6,17 @@ use askama::Template;
 
 use crate::{
     data::DatabaseData,
-    templates::{forum::ForumTemplate, index::IndexTemplate, thread::ThreadTemplate},
+    templates::{BaseProps, forum::ForumTemplate, index::IndexTemplate, thread::ThreadTemplate},
 };
 
 /// Import a database backup
 #[derive(FromArgs)]
 #[argh(subcommand, name = "render")]
-pub struct RenderHtmlCommand {}
+pub struct RenderHtmlCommand {
+    /// a base path to put in a `<base>` tag
+    #[argh(option)]
+    base_url: Option<String>,
+}
 
 impl RenderHtmlCommand {
     pub async fn run(self) -> anyhow::Result<()> {
@@ -24,8 +28,12 @@ impl RenderHtmlCommand {
         create_dir("./output/forums").context("Create forums dir")?;
         create_dir("./output/threads").context("Create threads dir")?;
 
+        let base_props = BaseProps {
+            base_url: self.base_url.unwrap_or_else(|| "/".into()),
+        };
+
         println!("Rendering index");
-        let index_template = IndexTemplate::from(&data);
+        let index_template = IndexTemplate::from((&data, &base_props));
 
         let mut output = String::new();
         index_template
@@ -35,8 +43,8 @@ impl RenderHtmlCommand {
 
         println!("Rendering {} forums", data.forums.len());
         for &forum_id in data.forums.keys() {
-            let forum_template =
-                ForumTemplate::try_from((&data, forum_id)).context("create forum template")?;
+            let forum_template = ForumTemplate::try_from((&data, &base_props, forum_id))
+                .context("create forum template")?;
 
             let mut output = String::new();
             forum_template
@@ -48,8 +56,8 @@ impl RenderHtmlCommand {
 
         println!("Rendering {} threads", data.threads.len());
         for &thread_id in data.threads.keys() {
-            let thread_template =
-                ThreadTemplate::try_from((&data, thread_id)).context("create thread template")?;
+            let thread_template = ThreadTemplate::try_from((&data, &base_props, thread_id))
+                .context("create thread template")?;
 
             let mut output = String::new();
             thread_template

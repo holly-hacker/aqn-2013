@@ -1,22 +1,30 @@
 use anyhow::Context as _;
 use askama::Template;
 
-use crate::data::{DatabaseData, Forum, Thread};
+use crate::{
+    data::{DatabaseData, Forum, Thread},
+    templates::BaseProps,
+};
 
 #[derive(Template)]
 #[template(path = "forum.html")]
 pub struct ForumTemplate<'a> {
+    pub base_props: &'a BaseProps,
+
     pub forum: &'a Forum,
     pub child_forums: Vec<&'a Forum>,
     pub sticky_threads: Vec<&'a Thread>,
     pub threads: Vec<&'a Thread>,
 }
 
-impl<'a> TryFrom<(&'a DatabaseData, u16)> for ForumTemplate<'a> {
+impl<'a> TryFrom<(&'a DatabaseData, &'a BaseProps, u16)> for ForumTemplate<'a> {
     type Error = anyhow::Error;
 
-    fn try_from((data, forum_id): (&'a DatabaseData, u16)) -> Result<Self, Self::Error> {
+    fn try_from(
+        (data, base_props, forum_id): (&'a DatabaseData, &'a BaseProps, u16),
+    ) -> Result<Self, Self::Error> {
         Ok(Self {
+            base_props,
             forum: data
                 .forums
                 .values()

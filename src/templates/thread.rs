@@ -6,21 +6,27 @@ use askama::Template;
 use crate::{
     data::{DatabaseData, Post, Thread, User},
     filters,
+    templates::BaseProps,
 };
 
 #[derive(Template)]
 #[template(path = "thread.html")]
 pub struct ThreadTemplate<'a> {
+    pub base_props: &'a BaseProps,
+
     pub thread: &'a Thread,
     pub posts: Vec<&'a Post>,
     pub users: &'a BTreeMap<u32, User>,
 }
 
-impl<'a> TryFrom<(&'a DatabaseData, u32)> for ThreadTemplate<'a> {
+impl<'a> TryFrom<(&'a DatabaseData, &'a BaseProps, u32)> for ThreadTemplate<'a> {
     type Error = anyhow::Error;
 
-    fn try_from((data, thread_id): (&'a DatabaseData, u32)) -> Result<Self, Self::Error> {
+    fn try_from(
+        (data, base_props, thread_id): (&'a DatabaseData, &'a BaseProps, u32),
+    ) -> Result<Self, Self::Error> {
         Ok(Self {
+            base_props,
             thread: data
                 .threads
                 .values()

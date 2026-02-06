@@ -36,11 +36,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-
 
-      - name: Build
-        run: cargo build --release
-
       - name: Render HTML
-        run: cargo run --release render
+        run: cargo run --release -- render --base-url "/aqn-2013/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
