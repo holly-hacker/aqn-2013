@@ -1,30 +1,26 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="https://classless.de/classless.css" />
-    </head>
-    <body>
-        <h1>The Aquila Network</h1>
-        <h2>{{forum.name}}</h2>
-        <p>{{forum.description}}</p>
+{% extends "_base.html" %}
+{% block title %}The Aquila Network - {{forum.name}}{% endblock %}
 
-        {% if !child_forums.is_empty() %}
-        <h3>Child forums</h3>
-        <ul>
-            {% for child_forum in child_forums %}
-            <li><a href="{{child_forum.id}}.html">{{child_forum.name}}</a></li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+{% block content %}
 
-        <h3>Threads</h3>
-        <ul>
-            {% for thread in threads %}
-            <li><code>{{thread.creation_date}}</code> - {{thread.subject}}</li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+<h1>The Aquila Network</h1>
+<h2>{{forum.name}}</h2>
+<p>{{forum.description}}</p>
+
+{% if !child_forums.is_empty() %}
+<h3>Child forums</h3>
+<ul>
+    {% for child_forum in child_forums %}
+    <li><a href="{{child_forum.id}}.html">{{child_forum.name}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h3>Threads</h3>
+<ul>
+    {% for thread in threads %}
+    <li><code>{{thread.creation_date}}</code> - {{thread.subject}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

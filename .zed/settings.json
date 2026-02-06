@@ -1,0 +1,8 @@
+{
+  "languages": {
+    "HTML": {
+      // Default formatter (prettier) does not recognize askama directives
+      "format_on_save": "off",
+    },
+  },
+}

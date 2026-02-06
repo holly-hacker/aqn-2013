@@ -1,27 +1,22 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="https://classless.de/classless.css" />
-    </head>
-    <body>
-        <h1>The Aquila Network</h1>
-        {% for parent_forum in forums if parent_forum.parent == None %}
-        <h2 data-id="{{parent_forum.id}}">{{parent_forum.name}}</h2>
-        <ul>
-            {% for child_forum in forums if child_forum.parent ==
-            Some(*parent_forum.id) %}
-            <li data-id="{{child_forum.id}}">
-                <a href="forums/{{child_forum.id}}.html">
-                    {{child_forum.name}}
-                </a>
-                <br />
-                {{child_forum.description}}
-            </li>
-            {% endfor %}
-        </ul>
-        {% endfor %}
-    </body>
-</html>
+{% extends "_base.html" %}
+{% block title %}The Aquila Network{% endblock %}
+
+{% block content %}
+
+<h1>The Aquila Network</h1>
+{% for parent_forum in forums if parent_forum.parent == None %}
+<h2 data-id="{{parent_forum.id}}">{{parent_forum.name}}</h2>
+<ul>
+    {% for child_forum in forums if child_forum.parent == Some(*parent_forum.id) %}
+    <li data-id="{{child_forum.id}}">
+        <a href="forums/{{child_forum.id}}.html">
+            {{child_forum.name}}
+        </a>
+        <br />
+        {{child_forum.description}}
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+{% endblock %}
