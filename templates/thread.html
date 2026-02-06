@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% block title %}The Aquila Network - {{thread.subject}}{% endblock %}
+
+{% block content %}
+
+<h1>The Aquila Network</h1>
+
+<h2>{{thread.subject}}</h2>
+
+<table>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>
+                <ul>
+                    <li>{{users[&post.user_id].username}}</li>
+                    <li><code>{{post.creation_date}}</code></li>
+                </ul>
+            </td>
+            <td>
+                {{post.message}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

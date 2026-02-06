@@ -104,6 +104,8 @@ pub struct Post {
     pub thread_id: u32,
     pub subject: String,
     pub creation_date: Timestamp,
+    pub user_id: u32,
+    pub message: String,
 }
 
 impl TryFrom<MybbPost> for Post {
@@ -115,6 +117,8 @@ impl TryFrom<MybbPost> for Post {
             thread_id: value.tid,
             subject: value.subject,
             creation_date: Timestamp::from_second(value.dateline).context("convert timestamp")?,
+            user_id: value.uid,
+            message: value.message,
         })
     }
 }
