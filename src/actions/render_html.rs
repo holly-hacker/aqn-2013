@@ -32,6 +32,9 @@ impl RenderHtmlCommand {
             base_url: self.base_url.unwrap_or_else(|| "/".into()),
         };
 
+        println!("Copying static data");
+        copy_dir_all("static", "output").context("copy static files")?;
+
         println!("Rendering index");
         let index_template = IndexTemplate::from((&data, &base_props));
 
@@ -77,5 +80,19 @@ fn create_dir(p: impl AsRef<Path> + Copy) -> anyhow::Result<()> {
     }
     std::fs::create_dir_all(p).context("create dir")?;
 
+    Ok(())
+}
+
+fn copy_dir_all(src: impl AsRef<Path>, dst: impl AsRef<Path>) -> std::io::Result<()> {
+    std::fs::create_dir_all(&dst)?;
+    for entry in std::fs::read_dir(src)? {
+        let entry = entry?;
+        let ty = entry.file_type()?;
+        if ty.is_dir() {
+            copy_dir_all(entry.path(), dst.as_ref().join(entry.file_name()))?;
+        } else {
+            std::fs::copy(entry.path(), dst.as_ref().join(entry.file_name()))?;
+        }
+    }
     Ok(())
 }

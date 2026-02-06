@@ -4,12 +4,82 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}The Aquila Network{% endblock %}</title>
-        <base href="{{base_props.base_url}}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css">
+        <base href="{{base_props.base_url}}" />
+        <link rel="stylesheet" href="style.css" type="text/css" />
     </head>
     <body>
-        {% block content %}
-        <p>Placeholder content</p>
-        {% endblock %}
+        <div id="wrapper">
+            <div id="logo">
+                <a href=""><img src="logo.png" /></a>
+                <a name="top" id="top"></a>
+                <div id="panel">
+                    <div id="panelcontent">
+                        <span id="quick_login" style="margin: 0 0 7px 0;">
+                            <span class="float_right" style="margin-left: 25px; text-align: right">
+                                <strong>Current time:</strong>
+                                2013-11-16, 5:32 PM
+                            </span>
+                            Hello There, Archive viewer!
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="clear"></div>
+
+            <div id="navbar">
+                <ul id="nav">
+                    <li><a href="" class="current">Forum Home</a></li>
+                    <li><a>Search</a></li>
+                    <li><a>Member List</a></li>
+                    <li><a>Chat</a></li>
+                    <li><a>Subscriptions</a></li>
+                </ul>
+           	</div>
+
+            <div id="contentwrap">
+               	<div id="container">
+                    <hr class="hidden">
+                    <br class="clear">
+                    <div id="content">
+                        <div class="navigation">
+                            <!-- TODO: nav here -->
+                            <span class="active">The Aquila Network</span>
+                        </div>
+
+                        {% block content %}
+                        <p>Placeholder content</p>
+                        {% endblock %}
+                        <br>
+                    </div>
+                    <hr class="hidden">
+                    <div id="copyright">
+                   	</div>
+                </div>
+            </div>
+
+            <br style="clear: both; line-height: 1px;">
+
+            <div id="btmnav">
+                <div class="btmnav">
+                    <span class="smalltext">
+                        <a href="mailto:annie@theaquila.net">Contact Us</a>
+                        | <a href="">The Aquila Network</a>
+                        | <a href="#top">Return to Top</a>
+                        | <a href="#content">Return to Content</a>
+                        | <a href="https://github.com/holly-hacker/aqn-2013">Source code (GitHub)</a>
+                    </span>
+                </div>
+            </div>
+
+            <div id="footer">
+                <div class="footertext">
+                Powered By <a href="http://www.mybboard.net/" target="_blank">MyBB</a>,
+                © 2002-2013 <a href="http://www.mybboard.net/" target="_blank">MyBB Group</a>.
+                Theme Copyright © <a href="mailto:supercwis@gmail.com" target="_blank"><b>Cwis</b></a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
